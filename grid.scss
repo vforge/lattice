@@ -1,0 +1,97 @@
+// vars
+$grid-columns: 12;
+$grid-toggle-point: 1000px;
+$grid-small-padding: 10px;
+$grid-big-padding: 20px;
+
+
+// mixins for generating grid itself
+@mixin grid-columns($grid-name) {
+  // zero-width column
+  .#{$grid-name}-0 {
+    display: none;
+    width: 0%;
+  }
+
+  // loop for all possible columns
+  @for $i from 1 through $grid-columns {
+    @for $j from 1 through $i - 1 {
+
+      // grid column .<name>-<j>-<i>
+      .#{$grid-name}-#{$j}-#{$i} {
+        width: 100% * ($j / $i);
+      }
+    }
+
+    // full width column
+    .#{$grid-name}-#{$i}-#{$i} {
+      width: 100%;
+    }
+  }
+}
+
+@mixin grid-layout($grid-size, $grid-padding) {
+  [class*='#{$grid-size}-'], [class*='#{$grid-size}-']:after, [class*='#{$grid-size}-']:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  [class*='#{$grid-size}-'] {
+    float: left;
+    padding-right: $grid-padding;
+  }
+
+  [class*='#{$grid-size}-']:last-of-type {
+    padding-right: 0;
+  }
+
+  .grid-row {
+    padding-left: $grid-padding;
+    padding-top: $grid-padding;
+  }
+
+  .grid-row > [class*='#{$grid-size}-']:last-of-type {
+    padding-right: $grid-padding;
+  }
+
+  @include grid-columns($grid-size);
+}
+
+// grid itself
+
+// 0) general styles
+.grid-row {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+
+  padding: 0;
+
+  &:after {
+    box-sizing: border-box;
+
+    clear: both;
+    content: "";
+    display: table;
+  }
+  &, &:after, &:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+.push-right {
+  float: right;
+}
+
+// 1) small
+@media (max-width: $grid-toggle-point) {
+  @include grid-layout('small', $grid-small-padding);
+}
+
+// 2) big
+@media (min-width: $grid-toggle-point + 1px) {
+  @include grid-layout('big', $grid-big-padding);
+}

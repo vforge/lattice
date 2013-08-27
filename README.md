@@ -1,4 +1,4 @@
 responsive-grid
 ===============
 
-Responsive Grid
+Responsive Grid made with SCSS.
