@@ -31,6 +31,8 @@ $grid-big-padding: 20px;
 }
 
 @mixin grid-layout($grid-size, $grid-padding) {
+  $grid-half-padding: $grid-padding / 2;
+
   [class*='#{$grid-size}-'], [class*='#{$grid-size}-']:after, [class*='#{$grid-size}-']:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -39,20 +41,11 @@ $grid-big-padding: 20px;
 
   [class*='#{$grid-size}-'] {
     float: left;
-    padding-right: $grid-padding;
-  }
-
-  [class*='#{$grid-size}-']:last-of-type {
-    padding-right: 0;
+    padding: 0 $grid-half-padding;
   }
 
   .grid-row {
-    padding-left: $grid-padding;
-    padding-top: $grid-padding;
-  }
-
-  .grid-row > [class*='#{$grid-size}-']:last-of-type {
-    padding-right: $grid-padding;
+    padding: $grid-padding $grid-half-padding 0 $grid-half-padding;
   }
 
   @include grid-columns($grid-size);
@@ -62,10 +55,6 @@ $grid-big-padding: 20px;
 
 // 0) general styles
 .grid-row {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-
   padding: 0;
 
   &:after {
@@ -95,3 +84,4 @@ $grid-big-padding: 20px;
 @media (min-width: $grid-toggle-point + 1px) {
   @include grid-layout('big', $grid-big-padding);
 }
+
