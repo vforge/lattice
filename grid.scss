@@ -1,7 +1,9 @@
 // vars
 $grid-columns: 12;
-$grid-toggle-point: 1000px;
+$grid-toggle-point-small: 600px;
+$grid-toggle-point-big: 1000px;
 $grid-small-padding: 10px;
+$grid-medium-padding: 15px;
 $grid-big-padding: 20px;
 
 
@@ -76,12 +78,17 @@ $grid-big-padding: 20px;
 }
 
 // 1) small
-@media (max-width: $grid-toggle-point) {
+@media (max-width: $grid-toggle-point-small) {
   @include grid-layout('small', $grid-small-padding);
 }
 
-// 2) big
-@media (min-width: $grid-toggle-point + 1px) {
+// 2) medium
+@media (min-width: $grid-toggle-point-small + 1px) and (max-width: $grid-toggle-point-big) {
+  @include grid-layout('medium', $grid-medium-padding);
+}
+
+// 3) big
+@media (min-width: $grid-toggle-point-big + 1px) {
   @include grid-layout('big', $grid-big-padding);
 }
 
