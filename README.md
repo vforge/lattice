@@ -1,5 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/vforge/responsive-grid/badge.png)](https://coveralls.io/r/vforge/responsive-grid)
-responsive-grid
+lattice
 ===============
 
-Responsive Grid made with SCSS.
+Responsive grid with breakpoints made in SCSS with <3
